@@ -10,17 +10,18 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.classes = results;
+            context.students = results;
             complete();
         });
     }
 
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+    /*Display all students.*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
         var mysql = req.app.get('mysql');
         getStudents(res, mysql, context, complete);
+        console.log(context)
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){

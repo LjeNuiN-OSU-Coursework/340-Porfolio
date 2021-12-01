@@ -1,3 +1,9 @@
+
+<div class="center"><form method="get" action="/"  >
+    <button class="hbutton" type="submit">Go Home</button>
+    </form>
+    </div>
+    
 <table>
 
     {{!-- Header section --}}
@@ -16,11 +22,11 @@
     <tbody>
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
-        {{#each data}}
+        {{#each tasks}}
         <tr>
-            <td>{{data.taskID}}</td>
-            <td>{{data.taskDescription}}</td>
-            <td>{{data.taskClass}}</td>
+            <td>{{taskID}}</td>
+            <td>{{taskDescription}}</td>
+            <td>{{taskClass}}</td>
             <td><button><a href="/teachers'{{teacherID}}">Delete</a></button></td>
             <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
         </tr>

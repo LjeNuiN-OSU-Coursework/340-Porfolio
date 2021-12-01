@@ -45,6 +45,7 @@ module.exports = function(){
         context.jsscripts = ["deleteTeacher.js"]
         getClass(res, mysql, context, complete);
         getTeachers(res, mysql, context, complete);
+        console.log(context)
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
