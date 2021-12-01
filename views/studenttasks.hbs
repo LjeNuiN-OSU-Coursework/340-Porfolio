@@ -1,0 +1,29 @@
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+        <th>Student ID</th>
+        <th>Task ID</th>
+        <th>Completed, 1 True, 0 False</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each studenttasks}}
+        <tr>
+            <td>{{studentTasksSid}}</td>
+            <td>{{studentTasksTid}}</td>
+            <td>{{studentTasksCompletion}}</td>
+            <td><button><a href="/teachers'{{teacherID}}">Delete</a></button></td>
+            <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

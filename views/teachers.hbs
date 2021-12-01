@@ -1,0 +1,42 @@
+<form id="addteacher" action="/teachers" method="post">
+    First name: <input type="text" name="teacherFname"><br>
+    Last name: <input type="text" name="teacherLname"><br>
+    Grade: <input type="number" name="teacherGrade"><br>
+    <input type="submit" value="Submit">
+
+ </form>
+<br/>
+
+<table>
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+        <th>ID</th>
+        <th>First</th>
+        <th>Last</th>
+        <th>Grade</th>
+        <th>Class</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each teachers}}
+        <tr>
+            <td>{{teacherID}}</td>
+            <td>{{teacherFName}}</td>
+            <td>{{teacherLName}}</td>
+            <td>{{teacherGrade}}</td>
+            <td>{{teacherClass}}</td>
+            <td><button onclick="deleteTeacher({{teacherID}})">Delete</button></td>
+            <td><a href="/teachers/{{teacherID}}">Update</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

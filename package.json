@@ -1,0 +1,18 @@
+{
+  "name": "project340",
+  "version": "1.0.0",
+  "description": "Database project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Hernandez and Samuel Senar",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-handlebars": "^6.0.2",
+    "forever": "^4.0.1",
+    "mysql": "^2.18.1"
+  }
+}
