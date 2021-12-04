@@ -4,6 +4,25 @@
     </form>
     </div>
     
+<form id="addstudenttask" action="/studenttasks" method="post">
+    Select a Student <select name="studentID" id="input-student-ajax">
+        <option value=""></option>
+        {{#each students}}
+        <option value="{{studentID}}">{{studentID}}</option>
+        {{/each}}
+    </select>
+
+    Tasks: <select name="taskID" id="input-task-ajax">
+        {{#each tasks}}
+        <option value="{{taskID}}">{{taskID}}</option>
+        {{/each}}
+    </select>
+    <div class="center">
+        <input type="submit" value="Add" id="sbutton">
+    </div>
+</form>
+ </div>
+<br/>
 <table>
 
     {{!-- Header section --}}

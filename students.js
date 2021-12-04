@@ -55,7 +55,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchStudent.js"];
+        context.jsscripts = ["searchStudent.js","deleteStudent.js"];
         var mysql = req.app.get('mysql');
         getStudents(res, mysql, context, complete);
         getClass(res, mysql, context, complete);
@@ -71,7 +71,7 @@ module.exports = function(){
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchStudent.js"];
+        context.jsscripts = ["searchStudent.js","deleteStudent.js"];
         var mysql = req.app.get('mysql');
         getStudentsWithNameLike(req, res, mysql, context, complete);
         function complete(){
@@ -86,7 +86,7 @@ module.exports = function(){
     router.get('/filter/:studentClass', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["searchStudent.js"];
+        context.jsscripts = ["searchStudent.js","deleteStudent.js"];
         var mysql = req.app.get('mysql');
         getStudentByClass(req,res, mysql, context, complete);
         getClass(res, mysql, context, complete);
@@ -98,6 +98,21 @@ module.exports = function(){
 
         }
     });
-
+    router.delete('/:studentID', function(req, res){
+        console.log(req.params.studentID)
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Students WHERE studentID = ?";
+        var inserts = [req.params.studentID];
+        sql = db.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    })
     return router;
 }();

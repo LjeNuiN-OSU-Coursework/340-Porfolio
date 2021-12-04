@@ -1,0 +1,19 @@
+<html>
+<h1>Updating <br>
+<h2>Class Id: {{class.classID}} <br>Grade {{class.classGrade}} {{teachers.teacherLname}}</h2>
+<form id="update-class" action="/classes" method="post"></h2>
+
+    
+    Grade: <input type="number" name="classGrade" value="{{class.classGrade}}"
+    min="1" max="5"><br>
+    Change or Assign Teacher: <select name="teacherID" id="teacher-selector"> 
+        {{#each teachers}}
+            <option value="{{teacherID}}"> {{personteacherFName}} {{person.teacherFName}} ID:{{teacherID}}</option>
+        {{/each}}
+    </select><br>
+   
+</form>
+<script defer>selectTeacher({{teacherID}});</script>
+<button onclick="updateClass({{class.classID}})" id="sbutton">Update</button>
+
+</html>

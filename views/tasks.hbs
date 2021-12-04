@@ -27,8 +27,10 @@
             <td>{{taskID}}</td>
             <td>{{taskDescription}}</td>
             <td>{{taskClass}}</td>
-            <td><button onclick="deleteTask({{taskID}})">Delete</button></td>
-            <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
+            <td><button onclick="deleteTask({{taskID}})" id="abutton">Delete</button></td>
+            <td>
+                <button><a href="/tasks/{{taskID}}" id="button">Update</a></button>
+            </td>
         </tr>
         {{/each}}
     </tbody>

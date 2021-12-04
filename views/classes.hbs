@@ -27,6 +27,10 @@
             <td>{{classID}}</td>
             <td>{{classGrade}}</td>
             <td>{{classTeacher}}</td>
+            <td><button onclick="deleteClass({{classID}})" id="abutton">Delete</button></td>
+            <td>
+                <button><a href="/classes/{{classID}}" id="button">Update</a></button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
