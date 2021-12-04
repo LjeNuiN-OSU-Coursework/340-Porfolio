@@ -66,12 +66,9 @@ CREATE TABLE `Students` (
   `studentFName` varchar(255) NOT NULL,
   `studentLName` varchar(255) NOT NULL,
   `studentAge` int(11) NOT NULL,
-  `studentGrade` int(11) NOT NULL,
   `studentClass` int(11) NOT NULL,
-  `studentTeacher` int(11) NOT NULL,
   PRIMARY KEY (`studentID`),
-  FOREIGN KEY (`studentClass`) REFERENCES `Classes` (`classID`),
-  FOREIGN KEY (`studentTeacher`) REFERENCES `Teachers` (`teacherID`)
+  FOREIGN KEY (`studentClass`) REFERENCES `Classes` (`classID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -83,15 +80,15 @@ CREATE TABLE `Students` (
 LOCK TABLES `Students` WRITE;
 /*!40000 ALTER TABLE `Students` DISABLE KEYS */;
 
-INSERT INTO `Students` (`studentFName`, `studentLName`, `studentAge`, `studentGrade`,`studentClass`, `studentTeacher`)
+INSERT INTO `Students` (`studentFName`, `studentLName`, `studentAge`,`studentClass`)
 VALUES 
-("Mike", "Henry",6 , 1, 1, 1),
-("Davi", "Smith", 6, 1, 2, 2),
-("John", "Deck", 7, 1, 3, 3),
-("Khan", "Lee", 6, 1, 4, 4),
-("Dereck", "Torres", 6, 1, 5, 5),
-("Juan", "Pablo", 6, 1, 1, 1),
-("Dave", "Jared", 6, 1, 1, 1);
+("Mike", "Henry",6 , 1),
+("Davi", "Smith", 6, 2),
+("John", "Deck", 7, 3),
+("Khan", "Lee", 6, 4),
+("Dereck", "Torres", 6, 5),
+("Juan", "Pablo", 6, 1),
+("Dave", "Jared", 6, 1);
 
 /*!40000 ALTER TABLE `Students` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -107,8 +104,9 @@ CREATE TABLE `studentTasks` (
   `studentTasksSid` int(11) NOT NULL,
   `studentTasksTid` int(11) NOT NULL,
   `studentTasksCompletion` BOOLEAN NOT NULL DEFAULT 0,
-  FOREIGN KEY (`studentTasksSid`) REFERENCES `Students` (`studentID`),
-  FOREIGN KEY (`studentTasksTid`) REFERENCES `Tasks` (`taskID`)
+  FOREIGN KEY (`studentTasksSid`) REFERENCES `Students` (`studentID`) ON DELETE CASCADE,
+  FOREIGN KEY (`studentTasksTid`) REFERENCES `Tasks` (`taskID`) ON DELETE CASCADE
+  
   
   
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -130,7 +128,7 @@ VALUES
 (4, 1),
 (5, 1),
 (6, 1),
-(7, 1)
+(7, 2)
 ;
 
 /*!40000 ALTER TABLE `studentTasks` ENABLE KEYS */;
@@ -150,10 +148,7 @@ CREATE TABLE `Teachers` (
   `teacherID` int(11) NOT NULL AUTO_INCREMENT,
   `teacherFName` varchar(255) NOT NULL,
   `teacherLName` varchar(255) NOT NULL,
-  `teacherGrade` INT(11) DEFAULT NULL,
-  `teacherClass` INT(11) DEFAULT NULL,
-  PRIMARY KEY (`teacherID`),
-  FOREIGN KEY(`teacherClass`) REFERENCES Classes (`classID`)
+  PRIMARY KEY (`teacherID`)
   
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -166,12 +161,12 @@ LOCK TABLES `Teachers` WRITE;
 /*!40000 ALTER TABLE `Teachers` DISABLE KEYS */;
 
 
-INSERT INTO `Teachers` (`teacherFName`, `teacherLName`, `teacherGrade`, `teacherClass`) VALUES 
-("Sarah", "Lee", 1, 1),
-("Jane", "Pysher", 1, 2),
-("Michael", "Nole", 1, 3),
-("Sarah", "Baker", 1, 4),
-("Katie", "Cruz", 1, 5)
+INSERT INTO `Teachers` (`teacherFName`, `teacherLName`) VALUES 
+("Sarah", "Lee"),
+("Jane", "Pysher"),
+("Michael", "Nole"),
+("Sarah", "Baker"),
+("Katie", "Cruz")
 ;
 
 
@@ -190,7 +185,7 @@ CREATE TABLE `Classes` (
   `classGrade` INT(11) NOT NULL,
   `classTeacher` INT(11) NOT NULL,
   PRIMARY KEY (`classID`),
-  FOREIGN KEY (`classTeacher`) REFERENCES Teachers (`teacherID`)
+  FOREIGN KEY (`classTeacher`) REFERENCES Teachers (`teacherID`) ON DELETE SET NULL
   
 ) ENGINE=InnoDB AUTO_INCREMENT= 1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

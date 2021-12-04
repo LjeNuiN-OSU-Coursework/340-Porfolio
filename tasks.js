@@ -19,6 +19,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
+        context.jsscripts = ["deleteTask.js"];
         var mysql = req.app.get('mysql');
         getTasks(res, mysql, context, complete);
         function complete(){
@@ -29,6 +30,21 @@ module.exports = function(){
 
         }
     });
+    router.delete('/:taskID', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Tasks WHERE taskID = ?";
+        var inserts = [req.params.taskID];
+        sql = db.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    })
 
     return router;
 }();

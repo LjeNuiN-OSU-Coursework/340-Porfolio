@@ -27,7 +27,7 @@
             <td>{{studentTasksSid}}</td>
             <td>{{studentTasksTid}}</td>
             <td>{{studentTasksCompletion}}</td>
-            <td><button><a href="/teachers'{{teacherID}}">Delete</a></button></td>
+            <td><button onclick="deleteStudentTask({{studentTasksTid}},{{studentTasksSid}})">Delete</button></td>
             <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
         </tr>
         {{/each}}

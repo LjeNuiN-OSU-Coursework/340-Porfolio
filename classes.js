@@ -5,7 +5,7 @@ module.exports = function(){
 
 
     function getClasses(res, mysql, context, complete){
-        db.pool.query("SELECT * FROM Classes", function(error, results, fields){
+        db.pool.query("SELECT classID, classGrade, classTeacher FROM Classes INNER JOIN Teachers ON Classes.classTeacher = Teachers.teacherID", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

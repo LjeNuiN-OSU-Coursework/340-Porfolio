@@ -3,7 +3,26 @@
     <button class="hbutton" type="submit">Go Home</button>
     </form>
     </div>
-    
+
+<form id='search_students' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Search people for first name starting with:</label>
+    <input id='first_name_search_string' type='text' name='first_name_search_string' value=''>
+    <input type="button" value="Search" onclick="searchStudentByFirstName()">
+</form>
+
+
+<form id='filter_students' action='' method=''>
+<!--- this form does not submit directly, the button handles all the interaction with backend -->
+    <label> Filter by class </label>
+    <select id='class_filter' name="class"> 
+        {{#each classes}}
+        <option value="{{classID}}">{{classID}}</option>
+        {{/each}}
+    </select><br>
+    <input type="button" value="Filter" onclick="filterStudentByClass()">
+</form>
+
 <table>
 
     {{!-- Header section --}}
@@ -32,9 +51,7 @@
             <td>{{studentFName}}</td>
             <td>{{studentLName}}</td>
             <td>{{studentAge}}</td>
-            <td>{{studentGrade}}</td>
-            <td>{{studentClass}}</td>
-            <td>{{studentTeacher}}</td>
+            <td>{{studentClass}}</td>>
             <td><button><a href="/teachers'{{teacherID}}">Delete</a></button></td>
             <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
         </tr>

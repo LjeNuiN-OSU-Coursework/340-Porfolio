@@ -26,7 +26,7 @@ module.exports = function(){
         });
     }
     function getTeacher(res, mysql, context, teacherID, complete){
-        var sql = "SELECT teacherID, teacherFname, teacherLname, teacherGrade, teacherClass FROM Teachers WHERE teacherID = ?";
+        var sql = "SELECT teacherID, teacherFname, teacherLname FROM Teachers WHERE teacherID = ?";
         var inserts = [teacherID];
         db.pool.query(sql, inserts, function(error, results, fields){
             if(error){
@@ -79,8 +79,8 @@ module.exports = function(){
         console.log(req.body.teacherLname)
         console.log(req.body)
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Teachers (teacherFname, teacherLname, teacherGrade) VALUES (?,?,?)";
-        var inserts = [req.body.teacherFname, req.body.teacherLname, req.body.teacherGrade];
+        var sql = "INSERT INTO Teachers (teacherFname, teacherLname) VALUES (?,?)";
+        var inserts = [req.body.teacherFname, req.body.teacherLname];
         sql = db.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
@@ -95,8 +95,8 @@ module.exports = function(){
     router.put('/:teacherID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.params.teacherID)
-        var sql = "UPDATE Teachers SET teacherFname=?, teacherLname=?, teacherGrade=?, teacherClass=? WHERE teacherID=?";
-        var inserts = [req.body.teacherFname, req.body.teacherLname, req.body.teacherGrade, req.body.teacherClass, req.params.teacherID]
+        var sql = "UPDATE Teachers SET teacherFname=?, teacherLname=? WHERE teacherID=?";
+        var inserts = [req.body.teacherFname, req.body.teacherLname, req.params.teacherID]
         sql = db.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(error)
