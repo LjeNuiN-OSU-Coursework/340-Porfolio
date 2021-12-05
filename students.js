@@ -21,7 +21,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.person = results[0];
+            context.students = results[0];
             complete();
         });
     }
@@ -79,7 +79,22 @@ module.exports = function(){
 
         }
     });
+    router.get('/search', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["searchStudent.js","deleteStudent.js"];
+        var mysql = req.app.get('mysql');
+        getStudents(res, mysql, context, complete);
+        getClass(res, mysql, context, complete);
+        console.log(context)
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('students', context);
+            }
 
+        }
+    });
     router.get('/:studentID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -105,7 +120,7 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                console.log(context.student)
+                console.log(context.students)
                 res.render('students', context);
             }
         }
