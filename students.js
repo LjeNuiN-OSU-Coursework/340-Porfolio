@@ -13,7 +13,18 @@ module.exports = function(){
             complete();
         });
     }
-
+    function getStudent(res, mysql, context, teacherID, complete){
+        var sql = "SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Students WHERE studentID = ?";
+        var inserts = [teacherID];
+        db.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.person = results[0];
+            complete();
+        });
+    }
     function getStudents(res, mysql, context, complete){
         db.pool.query("SELECT * FROM Students", function(error, results, fields){
             if(error){
@@ -68,6 +79,23 @@ module.exports = function(){
 
         }
     });
+
+    router.get('/:studentID', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["updateStudent.js"];
+        var mysql = req.app.get('mysql');
+        getStudent(res, mysql, context, req.params.studentID, complete);
+        getClass(res, mysql, context, complete);
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                console.log(context)
+                res.render('studentUpdate', context);
+            }
+    
+        }
+    });
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -97,6 +125,39 @@ module.exports = function(){
             }
 
         }
+    });
+    router.post('/', function(req, res){
+        console.log(req.body)
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Students (studentFName, studentLName, studentAge, studentClass) VALUES (?,?,?,?)";
+        var inserts = [req.body.studentFName, req.body.studentLName, req.body.studentAge, req.body.studentClass];
+        sql = db.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/students');
+            }
+        });
+    });
+
+    router.put('/:studentID', function(req, res){
+        var mysql = req.app.get('mysql');
+        console.log("boosted", req.params.studentID)
+        var sql = "UPDATE Students SET studentFName=?, studentLName=? WHERE studentID=?";
+        var inserts = [req.body.studentFName, req.body.studentLName, req.params.studentID]
+        sql = db.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(error)
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+
+                res.status(200);
+                res.end();
+            }
+        });
     });
     router.delete('/:studentID', function(req, res){
         console.log(req.params.studentID)

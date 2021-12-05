@@ -3,7 +3,23 @@
     <button class="hbutton" type="submit">Go Home</button>
     </form>
     </div>
-    
+
+<div class="center"><h2>Add a task</h2>
+<form id="addtask" action="/tasks" method="post">
+    <input type="text" name="taskDescription" placeholder="Input task description"><br>
+    Class: <select name="taskClass" id="class-selector"> 
+        {{#each classes}}
+            <option value="{{classID}}">Class {{classID}}</option>
+        {{/each}}
+    </select><br>
+
+    <div class="center">
+        <input type="submit" value="Add" id="sbutton">
+    </div>
+
+ </form>
+ </div>
+<br/>
 <table>
 
     {{!-- Header section --}}

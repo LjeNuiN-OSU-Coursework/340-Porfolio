@@ -1,0 +1,14 @@
+<html>
+<h1>Updating <br>
+<h2>Student Id: {{person.studentID}} <br>{{person.studentFName}} {{person.studentLName}} <br></h2>
+<form id="update-student" action="/students" method="post"></h2>
+
+    First name: <input type="text" name="studentFName" value="{{person.studentFName}}"><br>
+    Last name: <input type="text" name="studentLName" value="{{person.studentLName}}"><br>
+
+   
+</form>
+<button onclick="updateStudent({{person.studentID}})" id="sbutton">Update</button>
+
+
+</html>

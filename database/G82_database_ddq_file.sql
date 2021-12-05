@@ -28,7 +28,7 @@ CREATE TABLE `Tasks` (
   `taskDescription` varchar(255) NOT NULL,
   `taskClass` int(11) ,
   PRIMARY KEY (`taskID`),
-  FOREIGN KEY (`taskClass`) REFERENCES `Classes` (`classID`)
+  FOREIGN KEY (`taskClass`) REFERENCES `Classes` (`classID`) ON DELETE SET NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
@@ -66,9 +66,9 @@ CREATE TABLE `Students` (
   `studentFName` varchar(255) NOT NULL,
   `studentLName` varchar(255) NOT NULL,
   `studentAge` int(11) NOT NULL,
-  `studentClass` int(11) NOT NULL,
+  `studentClass` int(11) DEFAULT NULL,
   PRIMARY KEY (`studentID`),
-  FOREIGN KEY (`studentClass`) REFERENCES `Classes` (`classID`)
+  FOREIGN KEY (`studentClass`) REFERENCES `Classes` (`classID`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -183,9 +183,9 @@ DROP TABLE IF EXISTS `Classes`;
 CREATE TABLE `Classes` (
   `classID` int(11) NOT NULL AUTO_INCREMENT UNIQUE,
   `classGrade` INT(11) NOT NULL,
-  `classTeacher` INT(11) NOT NULL,
+  `classTeacher` INT(11) DEFAULT NULL,
   PRIMARY KEY (`classID`),
-  FOREIGN KEY (`classTeacher`) REFERENCES Teachers (`teacherID`) ON DELETE SET NULL
+  FOREIGN KEY (`classTeacher`) REFERENCES `Teachers` (`teacherID`) ON DELETE SET NULL
   
 ) ENGINE=InnoDB AUTO_INCREMENT= 1 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;

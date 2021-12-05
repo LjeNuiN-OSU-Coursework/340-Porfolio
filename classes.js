@@ -25,7 +25,7 @@ module.exports = function(){
         });
     }
     function getClasses(res, mysql, context, complete){
-        db.pool.query("SELECT classID, classGrade, classTeacher FROM Classes INNER JOIN Teachers ON Classes.classTeacher = Teachers.teacherID", function(error, results, fields){
+        db.pool.query("SELECT classID, classGrade, classTeacher FROM Classes", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -50,6 +50,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
+        context.jsscripts = ["selectClass.js", "updateClass.js","deleteClass.js"];
         var mysql = req.app.get('mysql');
         getClasses(res, mysql, context, complete);
         function complete(){
@@ -75,6 +76,25 @@ module.exports = function(){
             }
     
         }
+    });
+
+    router.post('/', function(req, res){
+        console.log(req.body.classGrade)
+        // console.log(req.body.classTeacher)
+        console.log(req.body)
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Classes (classGrade) VALUES (?)";
+        var inserts = [req.body.classGrade];
+        sql = db.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                console.log(JSON.stringify(error))
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.redirect('/classes');
+            }
+        });
     });
     
     router.put('/:classID', function(req, res){

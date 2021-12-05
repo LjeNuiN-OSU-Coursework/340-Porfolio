@@ -1,3 +1,4 @@
+<img src="https://1635225677.rsc.cdn77.org/images/why_should_young_students_be_encouraged_to_learn_programming.jpg" alt= "loading image">
 
 <div class="center"><form method="get" action="/"  >
     <button class="hbutton" type="submit">Go Home</button>
@@ -22,7 +23,33 @@
     </select><br>
     <input type="button" value="Filter" onclick="filterStudentByClass()">
 </form>
+<br>
 
+<div class="center"><h2>Add a Student</h2>
+<form id="addstudent" action="/students" method="post">
+    <input type="text" name="studentFName" placeholder="First Name"><br>
+    <input type="text" name="studentLName" placeholder="Last Name"><br>
+    <select class="center" type="number" name ="studentAge">        
+            <option value=5>5 years old </option>
+            <option value=6>6 years old </option>
+            <option value=7>7 years old </option>
+            <option value=8>8 years old</option>
+            <option value=9>9 years old</option>
+    </select>
+
+    Class: <select name="studentClass" id="class-selector"> 
+        {{#each classes}}
+            <option value="{{classID}}">Class {{classID}}</option>
+        {{/each}}
+    </select><br>
+
+    <div class="center">
+        <input type="submit" value="Add" id="sbutton">
+    </div>
+
+ </form>
+ </div>
+<br/>
 <table>
 
     {{!-- Header section --}}
@@ -49,10 +76,16 @@
             <td>{{studentFName}}</td>
             <td>{{studentLName}}</td>
             <td>{{studentAge}}</td>
-            <td>{{studentClass}}</td>>
-            <td><button onclick="deleteStudent({{studentID}})">Delete</a></button></td>
-            <td><a href="/students/{{studentID}}">Update</a></td>
+            <td>{{studentClass}}</td>
+            <td><button onclick="deleteStudent({{studentID}})" id="abutton">Delete</button></td>
+            <td>
+                <button><a href="/students/{{studentID}}" id="abutton">Update</a></button>
         </tr>
         {{/each}}
     </tbody>
 </table>
+
+
+
+
+
