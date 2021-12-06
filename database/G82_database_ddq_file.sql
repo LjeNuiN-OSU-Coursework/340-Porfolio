@@ -28,7 +28,7 @@ CREATE TABLE `Tasks` (
   `taskDescription` varchar(255) NOT NULL,
   `taskClass` int(11) ,
   PRIMARY KEY (`taskID`),
-  FOREIGN KEY (`taskClass`) REFERENCES `Classes` (`classID`) ON DELETE SET NULL
+  FOREIGN KEY (`taskClass`) REFERENCES `Classes` (`classID`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 
