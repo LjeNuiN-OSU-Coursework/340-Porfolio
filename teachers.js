@@ -5,7 +5,7 @@ module.exports = function(){
 
 
     function getClass(res, mysql, context, complete){
-        db.pool.query("SELECT classID FROM Classes", function(error, results, fields){
+        db.pool.query("SELECT Classes.classID, Teachers.teacherLName FROM Classes LEFT JOIN Teachers on Classes.classTeacher = Teachers.teacherID;", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();

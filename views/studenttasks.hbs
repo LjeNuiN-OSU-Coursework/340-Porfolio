@@ -8,13 +8,13 @@
     Select a Student <select name="studentID" id="input-student-ajax">
         <option value=""></option>
         {{#each students}}
-        <option value="{{studentID}}">{{studentID}}</option>
+        <option value="{{studentID}}">Student: {{studentID}} {{studentFName}} {{studentLName}}</option>
         {{/each}}
     </select>
 
     Tasks: <select name="taskID" id="input-task-ajax">
         {{#each tasks}}
-        <option value="{{taskID}}">{{taskID}}</option>
+        <option value="{{taskID}}">Task {{taskID}}: {{taskDescription}} </option>
         {{/each}}
     </select>
     <div class="center">
@@ -49,7 +49,7 @@
             <td>{{studentTasksTid}}</td>
             <td>{{studentTasksCompletion}}</td>
             <td><button onclick="deleteStudentTask({{studentTasksTid}},{{studentTasksSid}})">Delete</button></td>
-            <td><a href="/update-teacher/{{teacherID}}">Update</a></td>
+            <td><a href="/studenttasks/{{studentTasksSid}}/{{studentTasksTid}}">Update</a></td>
         </tr>
         {{/each}}
     </tbody>

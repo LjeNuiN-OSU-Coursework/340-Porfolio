@@ -4,7 +4,7 @@ module.exports = function(){
     var db = require('./database/db-connector')
 
     function getClass(res, mysql, context, complete){
-        db.pool.query("SELECT classID FROM Classes", function(error, results, fields){
+        db.pool.query("SELECT Classes.classID, Teachers.teacherFName, Teachers.teacherLName FROM Classes LEFT JOIN Teachers on Classes.classTeacher = Teachers.teacherID", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -13,9 +13,9 @@ module.exports = function(){
             complete();
         });
     }
-    function getStudent(res, mysql, context, teacherID, complete){
+    function getStudent(res, mysql, context, studentID, complete){
         var sql = "SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Students WHERE studentID = ?";
-        var inserts = [teacherID];
+        var inserts = [studentID];
         db.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -74,6 +74,7 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
+                console.log(context)
                 res.render('students', context);
             }
 
@@ -98,7 +99,7 @@ module.exports = function(){
     router.get('/:studentID', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateStudent.js"];
+        context.jsscripts = ["updateStudent.js", "selectClass.js"];
         var mysql = req.app.get('mysql');
         getStudent(res, mysql, context, req.params.studentID, complete);
         getClass(res, mysql, context, complete);
@@ -159,9 +160,9 @@ module.exports = function(){
 
     router.put('/:studentID', function(req, res){
         var mysql = req.app.get('mysql');
-        console.log("boosted", req.params.studentID)
-        var sql = "UPDATE Students SET studentFName=?, studentLName=? WHERE studentID=?";
-        var inserts = [req.body.studentFName, req.body.studentLName, req.params.studentID]
+        console.log("boosted", req.body,"ouch" ,req.params.studentID)
+        var sql = "UPDATE Students SET studentFName=?, studentLName=?, studentClass=? WHERE studentID=?";
+        var inserts = [req.body.studentFName, req.body.studentLName, req.body.studentClass, req.params.studentID]
         sql = db.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(error)

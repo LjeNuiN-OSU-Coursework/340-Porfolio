@@ -15,7 +15,7 @@ module.exports = function(){
     }
 
     function getUnsignedTeacher(res, mysql, context, complete){
-        db.pool.query("Select teacherID from Teachers left join Classes on Teachers.teacherID = Classes.classTeacher where Classes.classTeacher is null;", function(error, results, fields){
+        db.pool.query("Select teacherID, teacherFName, teacherLName from Teachers left join Classes on Teachers.teacherID = Classes.classTeacher where Classes.classTeacher is null;", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -103,8 +103,8 @@ module.exports = function(){
         console.log(req.params)
         console.log(req.body)
     
-        var sql = "UPDATE Classes SET classTeacher=? WHERE classID=?";
-        var inserts = [parseInt(req.body.teacherID), parseInt(req.params.classID)];
+        var sql = "UPDATE Classes SET classGrade=?, classTeacher=? WHERE classID=?";
+        var inserts = [req.body.classGrade, req.body.teacherID, req.params.classID];
         sql = db.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(error)

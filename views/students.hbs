@@ -4,32 +4,35 @@
     <button class="hbutton" type="submit">Go Home</button>
     </form>
     </div>
+<div class="center"><form method="get" action="/students"  >
+    <button class="hbutton" type="submit">Reset to Full Table</button>
+    </form>
+    </div>
 
 <div class="center">
 <form id='search_students' action='' method=''>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Search people for first name starting with:</label>
-    <input id='first_name_search_string' type='text' name='first_name_search_string' value=''>
-    <input type="button" value="Search" onclick="searchStudentByFirstName()">
+    <label> </label>
+    <input id='first_name_search_string' type='text' name='first_name_search_string' value='' placeholder="Search by First Name">
+    <input type="button" id="sbutton" value="Search" onclick="searchStudentByFirstName()">
 </form>
 </div>
 <div class="center">
 <form id='filter_students' action='' method=''>
 <!--- this form does not submit directly, the button handles all the interaction with backend -->
-    <label> Filter by class </label>
+    <label> Filter by Class</label>
+    <br>
     <select id='class_filter' name="class"> 
         {{#each classes}}
         <option value="{{classID}}">{{classID}}</option>
         {{/each}}
-    </select><br>
-    <input type="button" value="Filter" onclick="filterStudentByClass()">
+        <input type="button" id="sbutton" value="Filter" onclick="filterStudentByClass()">
+    </select>
+    
 </form>
 <br>
 </div>
-<div class="center"><form method="get" action="/students"  >
-    <button class="hbutton" type="submit">Reset to Full Table</button>
-    </form>
-    </div>
+
 
 <div class="center"><h2>Add a Student</h2>
 <form id="addstudent" action="/students" method="post">

@@ -1,0 +1,13 @@
+<html>
+<h1>Updating <br>
+<h2>Student Id: {{studenttasks.studentTasksSid}}<br></h2>
+<form id="update-studenttasks" action="/studenttasks" method="post"></h2>
+
+    Completed:<input type="number" name="studentTasksCompletion" value="{{studenttasks.studentTasksCompletion}}"><br>
+   
+</form>
+
+<button onclick="updateStudentTask({{studenttasks.studentTasksSid}},{{studenttasks.studentTasksTid}})">Update</button>
+
+
+</html>

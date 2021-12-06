@@ -46,8 +46,8 @@ INSERT INTO `Tasks` (taskDescription, taskClass)VALUES
 ("One's times tables", 1),
 ("One's times tables", 1),
 ("Double trouble Q1- Q5", 2),
-("Two's times tables", 2),
-("Little red riding hood chapter 1 summary", 2);
+("Two's times tables", 3),
+("Little red riding hood chapter 1 summary", 3);
 
 
 /*!40000 ALTER TABLE `Tasks` ENABLE KEYS */;
@@ -88,7 +88,7 @@ VALUES
 ("Khan", "Lee", 6, 4),
 ("Dereck", "Torres", 6, 5),
 ("Juan", "Pablo", 6, 1),
-("Dave", "Jared", 6, 1);
+("Dave", "Jared", 6, 2);
 
 /*!40000 ALTER TABLE `Students` ENABLE KEYS */;
 UNLOCK TABLES;

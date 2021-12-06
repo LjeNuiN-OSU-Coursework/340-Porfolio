@@ -1,14 +1,20 @@
 <html>
 <h1>Updating <br>
-<h2>Student Id: {{person.studentID}} <br>{{person.studentFName}} {{person.studentLName}} <br></h2>
+<h2>Student Id: {{students.studentID}} <br>{{students.studentFName}} {{students.studentLName}} <br></h2>
 <form id="update-student" action="/students" method="post"></h2>
 
     First name: <input type="text" name="studentFName" value="{{person.studentFName}}"><br>
     Last name: <input type="text" name="studentLName" value="{{person.studentLName}}"><br>
-
+    Change or Assign Class: <select name="studentClass" id="class-selector" selected={{students.studentClass}}> 
+        {{#each classes}}
+            <option value="{{classID}}"> With {{teacherFName}} {{teacherLName}} ID:{{classID}}</option>
+        {{/each}}
+    </select><br>
    
 </form>
-<button onclick="updateStudent({{person.studentID}})" id="sbutton">Update</button>
+<script defer>selectClass({{classID}});</script>
+
+<button onclick="updateStudent({{students.studentID}})" id="sbutton">Update</button>
 
 
 </html>
