@@ -46,7 +46,8 @@ module.exports = function(){
             complete();
         });
     }
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+
+    /*Get all classes and their data*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -61,6 +62,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Get a class for the purpose of an update*/
     router.get('/:classID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -78,9 +81,9 @@ module.exports = function(){
         }
     });
 
+    /*Inserting a new class into the table.*/
     router.post('/', function(req, res){
         console.log(req.body.classGrade)
-        // console.log(req.body.classTeacher)
         console.log(req.body)
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Classes (classGrade) VALUES (?)";
@@ -97,6 +100,7 @@ module.exports = function(){
         });
     });
     
+    /*Updating a specific class*/
     router.put('/:classID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.params.classID)
@@ -118,7 +122,7 @@ module.exports = function(){
         });
     });
     
-        // delete
+    // delete
     router.delete('/:classID', function(req, res){
         console.log(req.params.classID)
         var mysql = req.app.get('mysql');

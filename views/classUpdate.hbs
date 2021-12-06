@@ -1,7 +1,14 @@
 <html>
 <h1>Updating <br>
 <h2>Class Id: {{class.classID}} <br>Grade {{class.classGrade}} {{teachers.teacherLname}}</h2>
-<form id="update-class" action="/classes" method="post"></h2>
+
+<div class="center">No Available Teachers? Go to teacher page to add new teacher.</div>
+<div class="center"><form method="get" action="/teachers"  >
+    <button class="hbutton" type="submit">Go to Teachers</button>
+    </form>
+    </div>
+    
+<form class="center" id="update-class" action="/classes" method="post"></h2>
 
     
     Grade: <select type="number" name ="classGrade">
@@ -12,7 +19,7 @@
             <option value=5>Fifth grade teacher</option>
     </select><br>
     
-    Change or Assign Teacher: <select name="teacherID" id="teacher-selector"> 
+    Teacher: <select name="teacherID" id="teacher-selector"> 
             <option value="{{teacherID}}">{{teacherFname}} {{teacherLname}} ID:{{class.classTeacher}}</option></option>
         {{!-- {{#each teachers}}
             <option value="{{teacherID}}"> {{personteacherFName}} {{person.teacherFName}} ID:{{teacherID}}</option>
@@ -24,6 +31,6 @@
    
 </form>
 <script defer>selectTeacher({{teacherID}});</script>
-<button onclick="updateClass({{class.classID}})" id="sbutton">Update</button>
+<button class="center" onclick="updateClass({{class.classID}})" id="sbutton">Update</button>
 
 </html>

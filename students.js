@@ -62,6 +62,8 @@ module.exports = function(){
               complete();
           });
       }
+    
+    
     /*Display all students.*/
     router.get('/', function(req, res){
         var callbackCount = 0;
@@ -80,6 +82,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Display all students when search is empty*/
     router.get('/search', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -96,6 +100,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Display student for purpose of update.*/
     router.get('/:studentID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -112,6 +118,8 @@ module.exports = function(){
     
         }
     });
+
+    /*Display all students matching search query of first name.*/
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -127,6 +135,7 @@ module.exports = function(){
         }
     });
 
+    /*Display all students matching filter of class ID.*/
     router.get('/filter/:studentClass', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -142,6 +151,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Insert new student*/
     router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
@@ -158,6 +169,7 @@ module.exports = function(){
         });
     });
 
+    /*Update new student*/
     router.put('/:studentID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.body,"ouch" ,req.params.studentID)
@@ -175,6 +187,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Delete a student*/
     router.delete('/:studentID', function(req, res){
         console.log(req.params.studentID)
         var mysql = req.app.get('mysql');

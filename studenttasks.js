@@ -48,7 +48,7 @@ module.exports = function(){
         });
     }
 
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+    /*Display all Student Tasks, which is a cross table of students and tasks*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -65,6 +65,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Get specific student task to update variable.*/
     router.get('/:studentID/:taskID', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -81,6 +83,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Insert new student task based off a Student ID and Task ID.*/
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO studentTasks (studentTasksSid, studentTasksTid) VALUES (?,?)";
@@ -97,6 +101,7 @@ module.exports = function(){
         });
     });
 
+    /*Update a student task that matches the Student Id and Task ID*/
     router.put('/:studentTasksSid/:studentTasksTid', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("working", req.params.studentTasksSid, req.params.studentTasksTid)
@@ -115,6 +120,7 @@ module.exports = function(){
         });
     });
 
+    /*Delete a student task*/
     router.delete('/studentTasksTid/:studentTasksTid/studentTasksSid/:studentTasksSid', function(req, res){
         console.log(req)
         console.log(req.params.studentTasksTid)

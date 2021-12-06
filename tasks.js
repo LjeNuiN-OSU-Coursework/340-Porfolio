@@ -38,7 +38,7 @@ module.exports = function(){
         });
     }
 
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+    /*Display all tasks.*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -54,6 +54,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Get task to update.*/
     router.get('/:taskID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -72,7 +74,7 @@ module.exports = function(){
     });
     
     
-        //for the adding form
+      /*Insertion of a task.*/
       router.post('/', function(req, res){
         console.log(req.body.teacherFname)
         console.log(req.body.teacherLname)
@@ -90,6 +92,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Update of a task.*/
     router.put('/:taskID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.params.taskID)
@@ -107,6 +111,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Deletion of a task.*/
     router.delete('/:taskID', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Tasks WHERE taskID = ?";

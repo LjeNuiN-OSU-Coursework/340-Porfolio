@@ -1,14 +1,16 @@
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9OWa23hQuCtCTI9gqBCirwFVHG2fKJy36bg&usqp=CAU" alt= "loading image">
 
 <div class="center"><form method="get" action="/"  >
     <button class="hbutton" type="submit">Go Home</button>
     </form>
     </div>
-    
+
+
 <div class="center">
 <form id="addteacher" action="/teachers" method="post">
     First name: <input type="text" name="teacherFname"><br>
     Last name: <input type="text" name="teacherLname"><br>
-    <input type="submit" value="Submit">
+    <input id="sbutton" type="submit" value="Submit">
 
  </form>
  </div>
@@ -39,8 +41,9 @@
             <td>{{teacherID}}</td>
             <td>{{teacherFName}}</td>
             <td>{{teacherLName}}</td>
-            <td><button onclick="deleteTeacher({{teacherID}})">Delete</button></td>
-            <td><a href="/teachers/{{teacherID}}">Update</a></td>
+            <td><button id="sbutton" onclick="deleteTeacher({{teacherID}})">Delete</button></td>
+            <td><button id="sbutton"n><a href="/teachers/{{teacherID}}">Update</a></button>
+            </td>
         </tr>
         {{/each}}
     </tbody>
