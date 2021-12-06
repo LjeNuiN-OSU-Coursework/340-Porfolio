@@ -3,6 +3,12 @@ module.exports = function(){
     var router = express.Router();
     var db = require('./database/db-connector')
 
+
+    // Citation for the following function: getTeacher
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTeacher(res, mysql, context, complete){
         db.pool.query("SELECT teacherID FROM Teachers", function(error, results, fields){
             if(error){
@@ -14,6 +20,12 @@ module.exports = function(){
         });
     }
 
+
+    // Citation for the following function: getUnsignedTeacher
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getUnsignedTeacher(res, mysql, context, complete){
         db.pool.query("Select teacherID, teacherFName, teacherLName from Teachers left join Classes on Teachers.teacherID = Classes.classTeacher where Classes.classTeacher is null;", function(error, results, fields){
             if(error){
@@ -24,6 +36,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClasses
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-13 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClasses(res, mysql, context, complete){
         db.pool.query("SELECT classID, classGrade, classTeacher FROM Classes", function(error, results, fields){
             if(error){
@@ -34,6 +52,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClass(res, mysql, context, classID, complete){
         var sql = "SELECT classID, classGrade, classTeacher FROM Classes WHERE classID = ?";
         var inserts = [classID];
