@@ -4,6 +4,11 @@ module.exports = function(){
     var db = require('./database/db-connector')
 
 
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 16-25 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTasks(res, mysql, context, complete){
         db.pool.query("SELECT * FROM Tasks", function(error, results, fields){
             if(error){
@@ -14,6 +19,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people_certs.js
+
     function getTask(res, mysql, context, taskID, complete){
         var sql = "SELECT taskID, taskDescription, taskClass FROM Tasks WHERE taskID = ?";
         var inserts = [taskID];
@@ -26,6 +37,11 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-14 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
 
     function getClass(res, mysql, context, complete){
         db.pool.query("SELECT classID FROM Classes", function(error, results, fields){

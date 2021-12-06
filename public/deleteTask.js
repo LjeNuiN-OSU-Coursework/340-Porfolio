@@ -1,5 +1,5 @@
 // Citation for the following function: deleteTask
-// Date: 12/06/2021
+// Date: 12/01/2021
 // Based on: knightsamar's 340_sample_nodejs_app github, for 'deleteperson.js' function deletePerson()
 // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/public/deleteperson.js
 
@@ -15,7 +15,7 @@ function deleteTask(taskID){
 
 
 // Citation for the following function: deleteStudentTask
-// Date: 12/06/2021
+// Date: 12/03/2021
 // Based on: knightsamar's 340_sample_nodejs_app github, for 'deleteperson.js', function deletePeopleCert()
 // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/public/deleteperson.js
 

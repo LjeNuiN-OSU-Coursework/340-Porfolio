@@ -3,6 +3,11 @@ module.exports = function(){
     var router = express.Router();
     var db = require('./database/db-connector')
 
+    // Citation for the following function: getStudents (studentID dropdown)
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people_certs.js from cs340_sample_nodejs_app lines 6-15 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people_certs.js
+
     function getStudents(res, mysql, context, complete){
         db.pool.query("SELECT studentID, studentFName, studentLName from Students", function(error, results, fields){
             if(error){
@@ -14,7 +19,11 @@ module.exports = function(){
         });
     }
 
-    /* get certificates to populate in dropdown */
+    // Citation for the following function: getTasks (classID drop down)
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people_certs.js from cs340_sample_nodejs_app lines 18-28 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people_certs.js
+
     function getTasks(res, mysql, context, complete){
         sql = "SELECT taskID, taskDescription from Tasks";
         db.pool.query(sql, function(error, results, fields){
@@ -26,6 +35,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getStudentTasks
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 16-25 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getStudentTasks(res, mysql, context, complete){
         db.pool.query("SELECT * FROM studentTasks", function(error, results, fields){
             if(error){
@@ -36,6 +51,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getStudentTask
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getStudentTask(res, mysql, context,studentTasksSid, studentTasksTid, complete){
         var inserts = [studentTasksSid,studentTasksTid];
         db.pool.query("SELECT * FROM studentTasks WHERE studentTasksSid =? AND studentTasksTid=?",inserts, function(error, results, fields){
