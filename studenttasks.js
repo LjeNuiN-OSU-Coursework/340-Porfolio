@@ -43,7 +43,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.studenttasks = results;
+            context.studenttasks = results[0];
             complete();
         });
     }
@@ -99,8 +99,8 @@ module.exports = function(){
 
     router.put('/:studentTasksSid/:studentTasksTid', function(req, res){
         var mysql = req.app.get('mysql');
-        console.log("boosted", req.params.studentTasksSid, req.params.studentTasksTid)
-        var sql = "UPDATE studentTasks SET studentTasksCompletion=? WHERE studentTasksSid=?, studentTasksTid=?";
+        console.log("working", req.params.studentTasksSid, req.params.studentTasksTid)
+        var sql = "UPDATE studentTasks SET studentTasksCompletion=? WHERE studentTasksSid=? AND studentTasksTid=?";
         var inserts = [req.body.studentTasksCompletion, req.params.studentTasksSid, req.params.studentTasksTid]
         sql = db.pool.query(sql,inserts,function(error, results, fields){
             if(error){
