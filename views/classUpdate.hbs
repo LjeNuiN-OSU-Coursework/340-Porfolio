@@ -11,7 +11,7 @@
 <form class="center" id="update-class" action="/classes" method="post"></h2>
 
     
-    Grade: <input type="number" name="classGrade" value="{{classGrade}}" min=1 max=5><br>
+    Grade: <input type="number" name="classGrade" value="{{class.classGrade}}" min=1 max=5><br>
     
     Teacher: <select name="teacherID" id="teacher-selector"> 
             <option value="{{teacherID}}">{{teacherFname}} {{teacherLname}} ID:{{class.classTeacher}}</option></option>

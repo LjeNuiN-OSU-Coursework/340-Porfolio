@@ -92,6 +92,12 @@ module.exports = function(){
           });
       }
     
+
+    // Citation for the following code lines 103-243
+    // Date: 12/02/2021
+    // Adapted from: knightsamar github cs340_sample_nodejs_app people.js lines 72-197
+    // followed ways to use router for get, put, search, post, delete
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js 
     
     /*Display all students.*/
     router.get('/', function(req, res){
