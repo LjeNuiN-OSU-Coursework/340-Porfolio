@@ -3,6 +3,12 @@ module.exports = function(){
     var router = express.Router();
     var db = require('./database/db-connector')
 
+
+    // Citation for the following function: getTeacher
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTeacher(res, mysql, context, complete){
         db.pool.query("SELECT teacherID FROM Teachers", function(error, results, fields){
             if(error){
@@ -14,6 +20,12 @@ module.exports = function(){
         });
     }
 
+
+    // Citation for the following function: getUnsignedTeacher
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getUnsignedTeacher(res, mysql, context, complete){
         db.pool.query("Select teacherID, teacherFName, teacherLName from Teachers left join Classes on Teachers.teacherID = Classes.classTeacher where Classes.classTeacher is null;", function(error, results, fields){
             if(error){
@@ -24,6 +36,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClasses
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-13 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClasses(res, mysql, context, complete){
         db.pool.query("SELECT classID, classGrade, classTeacher FROM Classes", function(error, results, fields){
             if(error){
@@ -34,6 +52,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClass(res, mysql, context, classID, complete){
         var sql = "SELECT classID, classGrade, classTeacher FROM Classes WHERE classID = ?";
         var inserts = [classID];
@@ -46,7 +70,15 @@ module.exports = function(){
             complete();
         });
     }
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+
+    // Citation for the following code lines 81-174
+    // Date: 12/04/2021
+    // Adapted from: knightsamar github cs340_sample_nodejs_app people.js lines 72-86, 123-137, 141-156, 160-176 180-197
+    // followed ways to use router for get, put, post, delete
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js 
+
+
+    /*Get all classes and their data*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -61,6 +93,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Get a class for the purpose of an update*/
     router.get('/:classID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -78,9 +112,9 @@ module.exports = function(){
         }
     });
 
+    /*Inserting a new class into the table.*/
     router.post('/', function(req, res){
         console.log(req.body.classGrade)
-        // console.log(req.body.classTeacher)
         console.log(req.body)
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Classes (classGrade) VALUES (?)";
@@ -97,6 +131,7 @@ module.exports = function(){
         });
     });
     
+    /*Updating a specific class*/
     router.put('/:classID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.params.classID)
@@ -118,7 +153,7 @@ module.exports = function(){
         });
     });
     
-        // delete
+    // delete
     router.delete('/:classID', function(req, res){
         console.log(req.params.classID)
         var mysql = req.app.get('mysql');

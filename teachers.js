@@ -3,6 +3,10 @@ module.exports = function(){
     var router = express.Router();
     var db = require('./database/db-connector')
 
+    // Citation for the following function: getClass
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-14 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
 
     function getClass(res, mysql, context, complete){
         db.pool.query("SELECT Classes.classID, Teachers.teacherLName FROM Classes LEFT JOIN Teachers on Classes.classTeacher = Teachers.teacherID;", function(error, results, fields){
@@ -15,6 +19,11 @@ module.exports = function(){
         });
     }
 
+    // Citation for the following function: getClass
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 16-25 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTeachers(res, mysql, context, complete){
         db.pool.query("SELECT * FROM Teachers", function(error, results, fields){
             if(error){
@@ -25,6 +34,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/05/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTeacher(res, mysql, context, teacherID, complete){
         var sql = "SELECT teacherID, teacherFname, teacherLname FROM Teachers WHERE teacherID = ?";
         var inserts = [teacherID];
@@ -37,6 +52,13 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following code lines 62-152
+    // Date: 12/05/2021
+    // Adapted from: knightsamar github cs340_sample_nodejs_app people.js lines 72-86, 123-137, 141-156, 160-176 180-197
+    // followed ways to use router for get, put, post, delete
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js 
+
     /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
     router.get('/', function(req, res){
         var callbackCount = 0;

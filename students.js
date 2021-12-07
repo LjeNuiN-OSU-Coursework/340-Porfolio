@@ -3,6 +3,11 @@ module.exports = function(){
     var router = express.Router();
     var db = require('./database/db-connector')
 
+    // Citation for the following function: getClass
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-14 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClass(res, mysql, context, complete){
         db.pool.query("SELECT Classes.classID, Teachers.teacherFName, Teachers.teacherLName FROM Classes LEFT JOIN Teachers on Classes.classTeacher = Teachers.teacherID", function(error, results, fields){
             if(error){
@@ -13,6 +18,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getStudent
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getStudent(res, mysql, context, studentID, complete){
         var sql = "SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Students WHERE studentID = ?";
         var inserts = [studentID];
@@ -25,6 +36,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getStudents
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 16-25 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getStudents(res, mysql, context, complete){
         db.pool.query("SELECT * FROM Students", function(error, results, fields){
             if(error){
@@ -35,8 +52,14 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getStudentsWithNameLike
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 42-55 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getStudentsWithNameLike(req, res, mysql, context, complete) {
-        //sanitize the input as well as include the % character
+        //sanitize the input as well as include the % character - comment from github source posted above
          var query = "SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Students WHERE studentFName LIKE" + db.pool.escape(req.params.s + '%');
         console.log(query)
   
@@ -49,6 +72,12 @@ module.exports = function(){
               complete();
           });
       }
+
+    // Citation for the following function: getStudentByClass
+    // Date: 12/02/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 27-39 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
       function getStudentByClass(req, res, mysql, context, complete){
         var query = "SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Students WHERE studentClass = ?";
         console.log(req.params)
@@ -62,6 +91,14 @@ module.exports = function(){
               complete();
           });
       }
+    
+
+    // Citation for the following code lines 103-243
+    // Date: 12/02/2021
+    // Adapted from: knightsamar github cs340_sample_nodejs_app people.js lines 72-197
+    // followed ways to use router for get, put, search, post, delete
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js 
+    
     /*Display all students.*/
     router.get('/', function(req, res){
         var callbackCount = 0;
@@ -80,6 +117,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Display all students when search is empty*/
     router.get('/search', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -96,6 +135,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Display student for purpose of update.*/
     router.get('/:studentID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -112,6 +153,8 @@ module.exports = function(){
     
         }
     });
+
+    /*Display all students matching search query of first name.*/
     router.get('/search/:s', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -127,6 +170,7 @@ module.exports = function(){
         }
     });
 
+    /*Display all students matching filter of class ID.*/
     router.get('/filter/:studentClass', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -142,6 +186,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Insert new student*/
     router.post('/', function(req, res){
         console.log(req.body)
         var mysql = req.app.get('mysql');
@@ -158,6 +204,7 @@ module.exports = function(){
         });
     });
 
+    /*Update new student*/
     router.put('/:studentID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.body,"ouch" ,req.params.studentID)
@@ -175,6 +222,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Delete a student*/
     router.delete('/:studentID', function(req, res){
         console.log(req.params.studentID)
         var mysql = req.app.get('mysql');

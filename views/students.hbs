@@ -88,9 +88,9 @@
             <td>{{studentLName}}</td>
             <td>{{studentAge}}</td>
             <td>{{studentClass}}</td>
-            <td><button onclick="deleteStudent({{studentID}})" id="abutton">Delete</button></td>
+            <td><button onclick="deleteStudent({{studentID}})" id="sbutton">Delete</button></td>
             <td>
-                <button><a href="/students/{{studentID}}" id="abutton">Update</a></button>
+                <button id="sbutton"><a href="/students/{{studentID}}">Update</a></button>
         </tr>
         {{/each}}
     </tbody>

@@ -4,6 +4,11 @@ module.exports = function(){
     var db = require('./database/db-connector')
 
 
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 16-25 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getTasks(res, mysql, context, complete){
         db.pool.query("SELECT * FROM Tasks", function(error, results, fields){
             if(error){
@@ -14,6 +19,12 @@ module.exports = function(){
             complete();
         });
     }
+
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 57-68 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people_certs.js
+
     function getTask(res, mysql, context, taskID, complete){
         var sql = "SELECT taskID, taskDescription, taskClass FROM Tasks WHERE taskID = ?";
         var inserts = [taskID];
@@ -27,6 +38,11 @@ module.exports = function(){
         });
     }
 
+    // Citation for the following function: getClass
+    // Date: 12/04/2021
+    // Adapted from: knightsamar people.js from cs340_sample_nodejs_app lines 5-14 function
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js
+
     function getClass(res, mysql, context, complete){
         db.pool.query("SELECT classID FROM Classes", function(error, results, fields){
             if(error){
@@ -38,7 +54,15 @@ module.exports = function(){
         });
     }
 
-    /*Display all people from a given homeworld. Requires web based javascript to delete users with AJAX*/
+
+    // Citation for the following code lines 65-167
+    // Date: 12/04/2021
+    // Adapted from: knightsamar github cs340_sample_nodejs_app people.js lines 72-86, 123-137, 141-156, 160-176 180-197
+    // followed ways to use router for get, put, post, delete
+    // Source URL: https://github.com/knightsamar/cs340_sample_nodejs_app/blob/master/people.js 
+
+
+    /*Display all tasks.*/
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -54,6 +78,8 @@ module.exports = function(){
 
         }
     });
+
+    /*Get task to update.*/
     router.get('/:taskID', function(req, res){
         callbackCount = 0;
         var context = {};
@@ -72,7 +98,7 @@ module.exports = function(){
     });
     
     
-        //for the adding form
+      /*Insertion of a task.*/
       router.post('/', function(req, res){
         console.log(req.body.teacherFname)
         console.log(req.body.teacherLname)
@@ -90,6 +116,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Update of a task.*/
     router.put('/:taskID', function(req, res){
         var mysql = req.app.get('mysql');
         console.log("boosted", req.params.taskID)
@@ -107,6 +135,8 @@ module.exports = function(){
             }
         });
     });
+
+    /*Deletion of a task.*/
     router.delete('/:taskID', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Tasks WHERE taskID = ?";

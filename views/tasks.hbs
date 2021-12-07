@@ -1,4 +1,4 @@
-
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYDXQUXn3awZ3RTcNzyvVRJ5uqG23pRaEMHA&usqp=CAU" alt= "loading image">
 <div class="center"><form method="get" action="/"  >
     <button class="hbutton" type="submit">Go Home</button>
     </form>
@@ -45,9 +45,9 @@
             <td>{{taskID}}</td>
             <td>{{taskDescription}}</td>
             <td>{{taskClass}}</td>
-            <td><button onclick="deleteTask({{taskID}})" id="abutton">Delete</button></td>
+            <td><button onclick="deleteTask({{taskID}})" id="sbutton">Delete</button></td>
             <td>
-                <button><a href="/tasks/{{taskID}}" id="button">Update</a></button>
+                <button id="sbutton"><a href="/tasks/{{taskID}}">Update</a></button>
             </td>
         </tr>
         {{/each}}

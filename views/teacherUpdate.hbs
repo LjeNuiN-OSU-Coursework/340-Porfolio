@@ -1,10 +1,10 @@
 <html>
-<h1>Update {{person.teacherID}} : {{person.teacherFname}} {{person.teacherLname}}:</h1>
-<form id="update-teacher" action="/teachers" method="post">
+<h1>Update {{person.teacherID}}: {{person.teacherFname}} {{person.teacherLname}}:</h1>
+<form class="center" id="update-teacher" action="/teachers" method="post">
 
     First name: <input type="text" name="teacherFname" value="{{person.teacherFname}}"><br>
     Last name: <input type="text" name="teacherLname" value="{{person.teacherLname}}"><br>
    
 </form>
-<button onclick="updateTeacher({{person.teacherID}})">Update</button>
+<button id="sbutton" class="center"onclick="updateTeacher({{person.teacherID}})">Update</button>
 </html>

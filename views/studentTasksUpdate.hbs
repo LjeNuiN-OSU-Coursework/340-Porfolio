@@ -1,13 +1,13 @@
 <html>
-<h1>Updating <br>
+<h1>Updating, Complete 1, Not 0<br>
 <h2>Student Id: {{studenttasks.studentTasksSid}}, Task: {{studenttasks.studentTasksTid}} <br></h2>
-<form id="update-studenttasks" action="/studenttasks" method="post"></h2>
+<form class="center"id="update-studenttasks" action="/studenttasks" method="post"></h2>
 
-    Completed:<input type="number" name="studentTasksCompletion" value="{{studenttasks.studentTasksCompletion}}"><br>
+    Completed:<input type="number" min=0 max=1 name="studentTasksCompletion" value="{{studenttasks.studentTasksCompletion}}"><br>
    
 </form>
 
-<button onclick="updateStudentTasks({{studenttasks.studentTasksSid}},{{studenttasks.studentTasksTid}})">Update</button>
+<button id="sbutton" class="center"onclick="updateStudentTasks({{studenttasks.studentTasksSid}},{{studenttasks.studentTasksTid}})">Update</button>
 
 
 </html>
