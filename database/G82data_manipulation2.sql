@@ -63,6 +63,9 @@ SELECT studentID, studentFName, studentLName, studentAge, studentClass FROM Stud
 
 
 
+
+
+
 -------------------------------------- All studentTasks Operations queries -----------------------------------------------------------------------
 -- create: studentTasks -- associate a charstudent with a task (M-to-M relationship addition)
 INSERT INTO studentTasks (studentTasksSid, studentTasksTid ) VALUES (:studentTasksSid_dropdown_input, :studentTasksTid_dropdown_input,)
